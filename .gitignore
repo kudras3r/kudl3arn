@@ -1,0 +1,5 @@
+.env
+.idea
+**/__pycache__/
+kudl3arn/db.sqlite3
+.git

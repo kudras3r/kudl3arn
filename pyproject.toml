@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "kudl3arn"
+version = "0.1.0"
+description = ""
+authors = ["kudras3r <d8880888@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.0.2"
+pillow = "^10.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
