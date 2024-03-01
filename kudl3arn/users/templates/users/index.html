@@ -1,16 +1,83 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-HELLO)
-<button type="button">
-    <a href="{% url 'users:login' %}">login</a>
-</button>
-<button type="button">
-    <a href="{% url 'users:registration' %}">registration</a>
-</button>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>kudl3arner</title>
+    <link rel="stylesheet" href="{% static '/css/main_style.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/main.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/reset.css' %}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alatsi&family=Alegreya+SC&family=Comforter&family=Comforter+Brush&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" href="{% static '/img/logos/kudlr1 1.svg' %}" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="body">
+      <header>
+        <nav class="nav">
+          <div class="nav_container">
+            <div class="nav_wrapper">
+              <img
+                src="{% static '/img/logos/logo (1).svg' %}"
+                alt="логотип"
+                class="nav_logo"
+              />
+              <ul class="nav_menu">
+                <li><a href="#">about</a></li>
+                <li><a href="#">contacts</a></li>
+                <li><a href="#">features</a></li>
+              </ul>
+            </div>
+            <div class="nav_button">
+              <a href="{% url 'users:login' %}" class="button_a">Sign In</a>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div class="wrapper">
+        <div class="content">
+          <div class="container">
+            <div class="new">
+              <div class="new_road">
+                <div class="new_road_overlay"><p>Replace your mind</p></div>
+              </div>
+              <div class="new_line"><img src="./img/Line 1.svg" alt="" /></div>
+              <div class="new_text">
+                <h1>A New Way To <span>Learn</span></h1>
+                <p>A new approach to your learning</p>
+                <div class="button_account">
+                  <a href="{% url 'users:registration' %}" class="csreate">Create Account</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer">
+          <div class="final">
+            <div class="final__text">
+              <p>
+                This project was created and maintained by
+                <a href="https://github.com/kudras3r" target="_blank"
+                  >kudras3r</a
+                >
+                with
+                <a href="https://github.com/LamoriSUP" target="_blank"
+                  >Lamori</a
+                >
+              </p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
 </html>
+
