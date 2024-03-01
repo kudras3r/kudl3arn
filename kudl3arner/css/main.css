@@ -1,0 +1,82 @@
+@keyframes scaleUp {
+  0% {
+    transform: scale(1); /* Начальный размер */
+  }
+  100% {
+    transform: scale(1.1); /* Конечный размер */
+  }
+}
+@keyframes scaledown {
+  0% {
+    transform: scale(1.1); /* Начальный размер */
+  }
+  100% {
+    transform: scale(1); /* Конечный размер */
+  }
+}
+
+.new {
+  margin-top: 135px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Raleway;
+}
+.new_road {
+  border: 12px solid #202328;
+  border-radius: 20px;
+  border-color: #202328;
+  background-image: url(../img/kudlr1\ 1.svg);
+  width: 480px;
+  height: 360px;
+  background-color: #f3cffc;
+}
+.new_road p {
+  margin: 36px 0px 0px 36px;
+  font-size: 22px;
+}
+
+.new_text {
+  height: 125px;
+  width: 346px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.new_text h1 {
+  font-size: 36px;
+  font-weight: 600;
+}
+.new_text p {
+  font-size: 20px;
+  font-weight: 400;
+}
+.new_text span {
+  color: #f6f;
+}
+
+.button_account a {
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
+  background-color: #eb9dff;
+  border-radius: 20px;
+  height: 37px;
+  width: 151px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+  transition: background-color 0.3s;
+}
+
+.button_account a:hover {
+  background-color: #eb9dff;
+  animation: scaleUp 0.3s forwards;
+}
+.button_account a:not(:hover) {
+  background-color: #eb9dff;
+  animation: scaledown 0.3s forwards;
+}
