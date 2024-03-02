@@ -30,6 +30,7 @@
                             </div>
                             <div class="card-body">
                                 <form action="{% url 'users:login' %}" method="post">
+                                    {% csrf_token %}
                                     {{ form.as_p }}
 <!--                                    <div class="form-group">-->
 <!--                                        <label class="small mb-1" for="inputEmailAddress">Имя пользователя</label>-->

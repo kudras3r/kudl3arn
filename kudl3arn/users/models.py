@@ -7,7 +7,7 @@ class User(AbstractUser, PermissionsMixin):
     image = models.ImageField(upload_to='users_images', null=True, blank=True)
 
     def __str__(self):
-        return f'| {self.username} |'
+        return f'{self.username}'
 
 
 class UserProfile(models.Model):
@@ -28,4 +28,4 @@ class Follower(models.Model):
     user_followed = models.ForeignKey(to='User', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'| {self.user} is followed to -> {self.user_followed} |'
+        return f'{self.user} is followed to -> {self.user_followed}'

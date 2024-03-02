@@ -12,4 +12,5 @@ urlpatterns = [
     path('', index, name='index'),
     path('login/', login, name='login'),
     path('registration/', registration, name='registration'),
+   # path('profile/')
 ]

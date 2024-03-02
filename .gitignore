@@ -1,5 +1,7 @@
 .env
 .idea
 **/__pycache__/
+**/migrations/
 kudl3arn/db.sqlite3
 .git
+
