@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{ title }}</title>
+
+    {% block links %} {% endblock %}
+
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <div class="nav_container">
+          <div class="nav_wrapper">
+            <img
+              src="{% static '/img/logos/logo (1).svg' %}"
+              alt="логотип"
+              class="nav_logo"
+            />
+            <ul class="nav_menu">
+              <li><a href="#">about</a></li>
+              <li><a href="#">contacts</a></li>
+              <li><a href="#">features</a></li>
+            </ul>
+          </div>
+          {% if authorized == False %}
+            <div class="nav_button">
+              <a href="{% url 'users:login' %}" class="button_a">Sign In</a>
+            </div>
+          {% endif %}
+        </div>
+      </nav>
+    </header>
+
+    {% block content %} {% endblock %}
+
+    <footer class="footer">
+      <div class="final">
+        <div class="final__text">
+          <p>
+            This project was created and maintained by
+            <a href="https://github.com/kudras3r" target="_blank"
+              >kudras3r</a
+            >
+            with
+            <a href="https://github.com/LamoriSUP" target="_blank"
+              >Lamori</a
+            >
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

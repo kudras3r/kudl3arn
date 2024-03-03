@@ -7,7 +7,11 @@ from users.forms import UserLoginForm, UserRegistrationForm
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    return render(request, 'users/index.html')
+    context = {
+        'title': 'kudl3arn',
+        'authorized': False
+    }
+    return render(request, 'users/index.html', context)
 
 
 def login(request: HttpRequest) -> HttpResponseRedirect:
@@ -24,7 +28,9 @@ def login(request: HttpRequest) -> HttpResponseRedirect:
         form = UserLoginForm()
 
     context = {
-        'form': form
+        'form': form,
+        'title': 'Login',
+        'authorized': True
     }
     return render(request, 'users/auth/login.html', context)
 
@@ -38,7 +44,9 @@ def registration(request: HttpRequest) -> HttpResponse:
     else:
         form = UserRegistrationForm()
     context = {
-        'form': form
+        'form': form,
+        'title': 'Registrate',
+        'authorized': False
     }
     return render(request, 'users/auth/registration.html', context)
 
