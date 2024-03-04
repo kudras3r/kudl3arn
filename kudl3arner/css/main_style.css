@@ -21,6 +21,7 @@ html {
 header {
   position: sticky;
   top: 0px;
+  z-index: 999;
 }
 nav {
   width: 100%;
@@ -91,6 +92,9 @@ nav li :not(:hover) {
   background-color: #d8c2da;
   height: 100%;
   flex: 1 1 auto;
+}
+body {
+  background-color: #d8c2da;
 }
 .wrapper {
   display: flex;

@@ -1,0 +1,86 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 160px auto 50px auto;
+  padding: 60px 0px 60px 0px;
+  font-family: Raleway;
+  background-color: #dab0de;
+  width: 550px;
+  height: 420px;
+  border: 12px solid #202328;
+  border-radius: 20px;
+  justify-content: space-between;
+}
+.login-form h1 {
+  font-size: 32px;
+  font-weight: bold;
+}
+.login-form_links {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form_text-fields {
+  height: 104px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.login-form_text-fields input {
+  background-color: #d8c2da;
+  border: none;
+  border-radius: 15px;
+  width: 264px;
+  height: 46px;
+  font-size: 12px;
+  font-weight: 500;
+  outline: none;
+  text-align: center;
+
+  &:hover {
+    animation: scaleUp 0.3s forwards;
+  }
+  &:not(:hover) {
+    animation: scaledown 0.3s forwards;
+  }
+
+  &:focus {
+    animation: scaleUp 0.3s forwards;
+  }
+}
+
+.login-form_signin-button {
+  color: #202328;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: #eb9dff;
+  height: 37px;
+  width: 151px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    animation: scaleUp 0.3s forwards;
+  }
+  &:not(:hover) {
+    animation: scaledown 0.3s forwards;
+  }
+}
+.login-form_links {
+  align-items: center;
+  height: 31px;
+  justify-content: space-between;
+}
+.login-form_links a {
+  color: #63376b;
+  font-size: 12px;
+  font-weight: 500;
+  &:hover {
+    animation: scaleUp 0.3s forwards;
+  }
+  &:not(:hover) {
+    animation: scaledown 0.3s forwards;
+  }
+}
