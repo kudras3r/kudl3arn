@@ -25,6 +25,7 @@
           <h1>LOGIN</h1>
           <div class="login-form_text-fields">
             <form class="form-body" action="{% url 'users:login' %}" method="post">
+
               {% csrf_token %}
 
               {{ form.username }}

@@ -1,0 +1,14 @@
+.login-form {
+  padding: 36px 0px 50px 0px;
+}
+
+.login-form input {
+  margin-top: 10px;
+}
+
+.login-form_text-fields {
+  height: 154px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
