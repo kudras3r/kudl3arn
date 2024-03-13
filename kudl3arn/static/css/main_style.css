@@ -21,6 +21,7 @@ html {
 header {
   position: sticky;
   top: 0px;
+  z-index: 999;
 }
 nav {
   width: 100%;
@@ -31,7 +32,7 @@ nav {
 .nav_logo {
   height: 40px;
   width: 150px;
-  margin-right: 128px;
+  /* margin-right: 128px; */
 }
 .nav_container {
   height: inherit;
@@ -64,12 +65,14 @@ nav li :not(:hover) {
 .nav_wrapper {
   display: flex;
   flex-flow: row nowrap;
+  width: 651px;
+  justify-content: space-between;
 }
 
 .nav_button a {
   color: #202328;
   font-weight: 500;
-  background-color: #d9d9d9;
+  background-color: white;
   height: 40px;
   width: 100px;
   border-radius: 15px;
@@ -79,18 +82,38 @@ nav li :not(:hover) {
   transition: background-color 0.3s;
 }
 .nav_button a:hover {
-  background-color: #c0c0c0;
   animation: scaleUp 0.3s forwards;
 }
 .nav_button a:not(:hover) {
-  background-color: #c0c0c0;
   animation: scaledown 0.3s forwards;
+}
+
+.nav_profile {
+  height: 86px;
+  width: 195px;
+  display: flex;
+  background-color: #2e3239;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 20px;
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+}
+.nav_profile_avatar {
+  height: 83px;
+  width: 83px;
+  border-radius: 50%;
 }
 
 .body {
   background-color: #d8c2da;
   height: 100%;
   flex: 1 1 auto;
+  font-family: Raleway;
+}
+body {
+  background-color: #d8c2da;
 }
 .wrapper {
   display: flex;
@@ -99,14 +122,14 @@ nav li :not(:hover) {
   overflow: hidden;
 }
 .container {
-  max-width: 1010px;
-  margin: 0px auto;
+  max-width: 1100px;
+  margin: 50px auto;
 }
 .content {
   flex: 1 1 auto;
-  background-color: #d8c2da;
 }
 
+/* footer */
 footer {
   height: 125px;
   background-color: #333;

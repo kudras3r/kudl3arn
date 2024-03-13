@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django import forms
 
 from users.models import User
@@ -43,3 +43,15 @@ class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'password1', 'password2')
+
+
+class UserProfileForm(UserChangeForm):
+    image = forms.ImageField(widget=forms.FileInput(), required=False)
+    username = forms.CharField(widget=forms.TextInput())
+    tg_link = forms.CharField(widget=forms.TextInput())
+    vk_link = forms.CharField(widget=forms.TextInput())
+    git_link = forms.CharField(widget=forms.TextInput())
+
+    class Meta:
+        model = User
+        fields = ('image', 'username', 'tg_link', 'vk_link', 'git_link')
