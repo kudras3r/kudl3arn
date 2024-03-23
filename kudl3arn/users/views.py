@@ -1,9 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.http import HttpRequest, HttpResponse
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
-from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from users.forms import UserLoginForm, UserRegistrationForm, UpdateUserForm, UpdateProfileForm
 from users.models import User
 
 
@@ -12,6 +13,7 @@ def index(request: HttpRequest) -> HttpResponse:
         'title': 'kudl3arn',
         'authorized': False
     }
+
     return render(request, 'users/index.html', context)
 
 
@@ -33,6 +35,7 @@ def login(request: HttpRequest) -> HttpResponseRedirect:
         'title': 'Login',
         'authorized': True
     }
+
     return render(request, 'users/auth/login.html', context)
 
 
@@ -49,36 +52,27 @@ def registration(request: HttpRequest) -> HttpResponse:
         'title': 'Registrate',
         'authorized': False
     }
+
     return render(request, 'users/auth/registration.html', context)
 
 
-def profile(request) -> HttpResponse:
+@login_required
+def profile(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return HttpResponseRedirect(reverse('users:profile'))
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
     context = {
         'title': 'Profile',
-        'username': request.user.username,
-        'tg_link': request.user.tg,
-        'vk_link': request.user.vk,
-        'git_link': request.user.github
+        'user_form': user_form,
+        'profile_form': profile_form
     }
+
     return render(request, 'users/profile.html', context)
-
-
-def profile_edit(request) -> HttpResponse:
-    if request.method == 'POST':
-        queryset = User.objects.get(pk=request.user.id)
-        form = UserProfileForm(data=request.POST, instance=queryset) #instance=request.user
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('users:profile'))
-        else:
-            print(form.errors)
-    else:
-        form = UserProfileForm(instance=request.user)
-    context = {
-        'title': 'Edit your profile',
-        'form': form
-    }
-    return render(request, 'users/profile_edit.html', context)
-
-
-

@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.models import User
 from django import forms
-
-from users.models import User
+from users.models import Profile
 
 
 class UserLoginForm(AuthenticationForm):
@@ -45,13 +45,23 @@ class UserRegistrationForm(UserCreationForm):
         fields = ('username', 'password1', 'password2')
 
 
-class UserProfileForm(UserChangeForm):
+class UpdateUserForm(forms.ModelForm):
+    username = forms.CharField(max_length=128, required=True, widget=forms.TextInput())
+
+    class Meta:
+        model = User
+        fields = ['username']
+
+
+class UpdateProfileForm(UserChangeForm):
     image = forms.ImageField(widget=forms.FileInput(), required=False)
-    username = forms.CharField(widget=forms.TextInput())
     tg_link = forms.CharField(widget=forms.TextInput())
     vk_link = forms.CharField(widget=forms.TextInput())
     git_link = forms.CharField(widget=forms.TextInput())
 
     class Meta:
-        model = User
-        fields = ('image', 'username', 'tg_link', 'vk_link', 'git_link')
+        model = Profile
+        fields = ['image', 'tg_link', 'vk_link', 'git_link'] #'image',
+
+    def clean_password(self):
+        return self.clean_password

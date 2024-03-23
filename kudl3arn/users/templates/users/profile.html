@@ -24,25 +24,35 @@
         <div class="profile">
           <div class="user-block">
             <div class="user-block_info">
-              <img
-                src="{% static '/img/avatar.svg' %}"
-                alt="аватар"
-                class="user-block_avatar"
-              />
-              <ul class="user-block_info_links">
-                <li><h1>{{ username }}</h1></li>
-                <li>
-                  <a href="{{ tg_link }}"><img src="{% static '/img/icons/tg.svg' %}" alt="" /></a>
-                </li>
-                <li>
-                  <a href="{{ vk_link }}"><img src="{% static '/img/icons/vk.svg' %}" alt="" /></a>
-                </li>
-                <li>
-                  <a href="{{ git_link }}"><img src="{% static '/img/icons/git.svg' %}" alt="" /></a>
-                </li>
-              </ul>
+              <form action="{% url 'users:profile' %}" method="post">
+                {% csrf_token %}
+                <img
+                  src="{% static '/img/avatar.svg' %}"
+                  alt="аватар"
+                  class="user-block_avatar"
+                />
+                {{ profile_form.image }}
+                <ul class="user-block_info_links">
+                  <li>
+                    {{ user_form.username }}
+                  </li>
+                  <li>
+                    <a href="#"><img src="{% static '/img/icons/tg.svg' %}" alt="" /></a>
+                    {{ profile_form.tg_link }}
+                  </li>
+                  <li>
+                    <a href="#"><img src="{% static '/img/icons/vk.svg' %}" alt="" /></a>
+                    {{ profile_form.vk_link }}
+                  </li>
+                  <li>
+                    <a href="#"><img src="{% static '/img/icons/git.svg' %}" alt="" /></a>
+                    {{ profile_form.git_link }}
+                  </li>
+                </ul>
+                <input type="submit" value="Save">
+            </form>
             </div>
-            <div class="user-block_button"><a href="{% url 'users:profile_edit' %}">Edit</a></div>
+<!--            <div class="user-block_button"><a href="#">Save</a></div>-->
           </div>
           <img src="{% static '/img/Line 1.svg' %}" alt="" class="line" />
           <div class="user-roadmaps">
