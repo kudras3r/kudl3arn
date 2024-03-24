@@ -1,8 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.contrib import auth, messages
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
 
 from users.forms import UserLoginForm, UserRegistrationForm, UpdateUserForm, UpdateProfileForm
 from users.models import User

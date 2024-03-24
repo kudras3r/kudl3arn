@@ -24,10 +24,11 @@
         <div class="profile">
           <div class="user-block">
             <div class="user-block_info">
-              <form action="{% url 'users:profile' %}" method="post">
+              <form action="{% url 'users:profile' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+<!--                "{% static '/img/avatar.svg' %}"-->
                 <img
-                  src="{% static '/img/avatar.svg' %}"
+                  src="{{ request.user.profile.get_image }}"
                   alt="аватар"
                   class="user-block_avatar"
                 />
