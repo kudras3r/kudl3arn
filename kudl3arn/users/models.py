@@ -6,7 +6,10 @@ from PIL import Image
 
 class Profile(models.Model):
     """ User information """
-    image = models.ImageField(default='user_image.jpg', upload_to='users_images', null=True, blank=True)
+    image = models.ImageField(
+        default='user_image.jpg', upload_to='users_images',
+        null=True, blank=True
+    )
     tg_link = models.CharField(max_length=256, null=True, blank=True)
     vk_link = models.CharField(max_length=256, null=True, blank=True)
     git_link = models.CharField(max_length=2000, null=True, blank=True)
@@ -19,14 +22,9 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        # img = Image.open(self.image.path)
-        # if img.height > 300 or img.width > 300:
-        #     output_size = (300, 300)
-        #     img.thumbnail(output_size)
-        #     img.save(self.image.path)
-
     @property
     def get_image(self):
+        """ Helps find avatar img path """
         if self.image and hasattr(self.image, 'url'):
             return self.image.url
         else:
