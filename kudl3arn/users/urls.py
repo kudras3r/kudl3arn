@@ -1,7 +1,4 @@
-"""
-URL configuration for kudl3arn project.
-"""
-from django.urls import path
+from django.urls import path, include
 
 from users.views import index, login, registration, profile
 
@@ -12,4 +9,6 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('registration/', registration, name='registration'),
     path('profile/', profile, name='profile'),
+   # path('<str:username>/profile', profile, name='profile'),
+    path('<str:username>/', include('roadmaps.urls')),
 ]

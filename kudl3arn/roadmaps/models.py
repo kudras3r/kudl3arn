@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 
 
 class BaseTechUnit(models.Model):
@@ -6,8 +7,10 @@ class BaseTechUnit(models.Model):
     Base abstract model to extends another technologies, topics etc.
     name and description are the basic fields for all techs.
     """
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, )
     description = models.TextField(max_length=1024)
+    created_timestamp = models.DateTimeField(auto_now=True)
+    is_private = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
@@ -15,11 +18,13 @@ class BaseTechUnit(models.Model):
 
 class RoadMap(BaseTechUnit):
     """
-    RoadMap model. RM -< TECH -< TOPIC -< SOURCE
+    RoadMap model. User -< RM -< TECH -< TOPIC -< SOURCE
     Something like 'Python, OOP, Backend etc'.
     """
-    progress = models.IntegerField()  # in rounded percents
+    progress = models.IntegerField(default=0)  # in rounded percents
     status = models.CharField(max_length=11)  # in progress | is done | will come
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.name}_RM'

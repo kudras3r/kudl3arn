@@ -1,18 +1,20 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-from PIL import Image
 
 
 class Profile(models.Model):
-    """ User information """
+    """
+    User information.
+    Profile <-> User
+    """
     image = models.ImageField(
         default='user_image.jpg', upload_to='users_images',
         null=True, blank=True
     )
     tg_link = models.CharField(max_length=256, null=True, blank=True)
     vk_link = models.CharField(max_length=256, null=True, blank=True)
-    git_link = models.CharField(max_length=2000, null=True, blank=True)
+    git_link = models.CharField(max_length=2048, null=True, blank=True)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -24,11 +26,10 @@ class Profile(models.Model):
 
     @property
     def get_image(self):
-        """ Helps find avatar img path """
+        """ Helps Django-templates find avatar img path """
         if self.image and hasattr(self.image, 'url'):
             return self.image.url
         else:
-            print(settings.MEDIA_URL)
             return settings.MEDIA_URL + 'user_image.jpg'
 
 

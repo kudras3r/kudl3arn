@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+  <h1>
+    You have this RMs:
+  </h1>
+  <ul>
+    {% for rm in user_roadmaps %}
+      <li>
+        <h1>{{ rm }}</h1>
+        <p>
+          name: {{ rm.name }} <br>
+          descr: {{ rm.description }} <br>
+          in progress at: {{ rm.progress }}%
+        </p>
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
