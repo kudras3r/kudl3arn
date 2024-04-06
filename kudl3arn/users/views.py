@@ -4,6 +4,7 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib import auth, messages
 from django.urls import reverse
 
+from roadmaps.models import RoadMap
 from users.forms import UserLoginForm, UserRegistrationForm, UpdateUserForm, UpdateProfileForm
 from users.models import User
 
@@ -11,7 +12,6 @@ from users.models import User
 def index(request: HttpRequest) -> HttpResponse:
     context = {
         'title': 'kudl3arn',
-        'authorized': False
     }
 
     return render(request, 'users/index.html', context)
@@ -50,7 +50,7 @@ def registration(request: HttpRequest) -> HttpResponse:
     context = {
         'form': form,
         'title': 'Registrate',
-        'authorized': False
+        'is_authorized': False
     }
 
     return render(request, 'users/auth/registration.html', context)
@@ -69,10 +69,12 @@ def profile(request: HttpRequest) -> HttpResponse:
     else:
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
+    user_roadmaps = RoadMap.objects.filter(user=request.user)
     context = {
         'title': 'Profile',
         'user_form': user_form,
-        'profile_form': profile_form
+        'profile_form': profile_form,
+        'user_roadmaps': user_roadmaps,
     }
 
     return render(request, 'users/profile.html', context)

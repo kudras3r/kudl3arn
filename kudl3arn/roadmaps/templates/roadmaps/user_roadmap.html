@@ -17,18 +17,6 @@
 {% endblock %}
 
 {% block content %}
-    You have this RMs:
-  </h1>
-  <ul>
-    {% for rm in user_roadmaps %}
-      <li>
-        <h1>{{ rm }}</h1>
-        <p>
-          name: {{ rm.name }} <br>
-          descr: {{ rm.description }} <br>
-          in progress at: {{ rm.progress }}%
-        </p>
-      </li>
-    {% endfor %}
-  </ul>
+  Your roadmap:
+  <h1>{{ user_roadmap.name }}</h1>
 {% endblock %}
