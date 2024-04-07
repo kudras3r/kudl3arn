@@ -6,7 +6,6 @@ from django.urls import reverse
 
 from roadmaps.models import RoadMap
 from users.forms import UserLoginForm, UserRegistrationForm, UpdateUserForm, UpdateProfileForm
-from users.models import User
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -37,6 +36,11 @@ def login(request: HttpRequest) -> HttpResponseRedirect:
     }
 
     return render(request, 'users/auth/login.html', context)
+
+
+def logout(request: HttpRequest) -> HttpResponseRedirect:
+    auth.logout(request)
+    return HttpResponseRedirect(reverse('users:index'))
 
 
 def registration(request: HttpRequest) -> HttpResponse:
