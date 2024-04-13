@@ -17,9 +17,12 @@
 {% endblock %}
 
 {% block content %}
-  Your roadmap:
-  <h1>{{ user_roadmap.name }}</h1>
-  <div>
-    <a href="/users/{{ request.user.username }}/roadmap/rm{{ user_roadmap.id }}/update/">Edit</a>
-  </div>
+<form action="/users/{{ request.user.username }}/roadmap/rm{{ roadmap.id }}/update/" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ rm_form.name }}
+  {{ rm_form.description }}
+  {{ rm_form.status }}
+  <input type="submit" value="Save">
+</form>
+
 {% endblock %}

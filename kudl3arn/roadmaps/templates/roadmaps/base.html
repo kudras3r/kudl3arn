@@ -25,9 +25,17 @@
             <li><a href="#">features</a></li>
           </ul>
         </div>
-        <div class="nav_button">
-          <a href="{% url 'users:profile' %}" class="button_a">{{ request.user.username }}</a>
-        </div>
+        {% if request.user.is_authenticated %}
+          <div class="nav_button">
+            <a href="{% url 'users:profile' %}" class="button_a">{{ request.user.username }}</a>
+          </div>
+          <form action="{% url 'users:logout' %}" method="post">
+            {% csrf_token %}
+            <div class="nav_button">
+              <button type="submit">LogOut</button>
+            </div>
+          </form>
+        {% endif %}
       </div>
     </nav>
   </header>
