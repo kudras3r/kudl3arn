@@ -11,5 +11,4 @@ urlpatterns = [
     path('logout/', logout, name='logout'),
     path('registration/', registration, name='registration'),
     path('profile/', profile, name='profile'),
-    # path('<str:username>/profile/', profile, name='profile'),
 ]

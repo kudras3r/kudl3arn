@@ -1,10 +1,9 @@
 from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
+from django.shortcuts import render
 
-from roadmaps.models import RoadMap
 from roadmaps.forms import UpdateRoadMapForm
+from roadmaps.models import RoadMap
 
 
 @login_required
@@ -23,7 +22,6 @@ def user_roadmap(request: HttpRequest, username: str, rm_id: int) -> HttpRespons
     roadmap = RoadMap.objects.get(id=rm_id)
     context = {
         'title': roadmap.name,
-        # 'is_authorized': True,
         'user_roadmap': roadmap,
     }
     return render(request, 'roadmaps/user_roadmap.html', context)
@@ -39,12 +37,10 @@ def update_roadmap(request: HttpRequest, username: str, rm_id: int) -> HttpRespo
             return HttpResponseRedirect(f'/users/{request.user.username}/roadmap/rm{roadmap.id}/')
     else:
         form = UpdateRoadMapForm(instance=roadmap)
-    # roadmap = RoadMap.objects.get(id=rm_id)
     context = {
         'title': 'RM update',
         'rm_form': form,
         'roadmap': roadmap,
     }
-
     return render(request, 'roadmaps/update_roadmap.html', context)
 

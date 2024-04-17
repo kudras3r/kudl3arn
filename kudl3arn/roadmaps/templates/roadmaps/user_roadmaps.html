@@ -24,7 +24,7 @@
       <li>
         <h1>{{ rm }}</h1>
         <p>
-          name: {{ rm.name }} <br>
+          <a href="{{ rm.get_url }}">name: {{ rm.name }}</a> <br>
           descr: {{ rm.description }} <br>
           in progress at: {{ rm.progress }}%
         </p>

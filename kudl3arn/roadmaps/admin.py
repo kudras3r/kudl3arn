@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import RoadMap, Technology, Topic, Source
+
+admin.site.register(RoadMap)
+admin.site.register(Topic)
+admin.site.register(Technology)
+admin.site.register(Source)

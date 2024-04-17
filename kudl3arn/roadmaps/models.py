@@ -1,4 +1,5 @@
 from django.db import models
+
 from users.models import User
 
 
@@ -28,6 +29,9 @@ class RoadMap(BaseTechUnit):
 
     def __str__(self):
         return f'{self.name}_RM'
+
+    def get_url(self):
+        return f'/users/{self.user.username}/roadmap/rm{self.id}/'
 
 
 class Technology(BaseTechUnit):
