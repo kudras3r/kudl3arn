@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from roadmaps.forms import UpdateRoadMapForm
 from roadmaps.models import RoadMap
+from roadmaps.managers import RoadMapManager
 
 
 @login_required
@@ -19,10 +20,13 @@ def user_roadmaps(request: HttpRequest, username) -> HttpResponse:
 
 @login_required
 def user_roadmap(request: HttpRequest, username: str, rm_id: int) -> HttpResponse:
-    roadmap = RoadMap.objects.get(id=rm_id)
+    manager = RoadMapManager(rm_id)
+    roadmap = manager.rm
+    rm_data = manager.get_techs()
     context = {
         'title': roadmap.name,
         'user_roadmap': roadmap,
+        'rm_data': rm_data,
     }
     return render(request, 'roadmaps/user_roadmap.html', context)
 

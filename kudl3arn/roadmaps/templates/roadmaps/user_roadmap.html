@@ -18,7 +18,28 @@
 
 {% block content %}
   Your roadmap:
-  <h1>{{ user_roadmap.name }}</h1>
+  <h1>{{ user_roadmap.name }} : {{ user_roadmap.status }}</h1>
+  <ul>
+    {% for tech, topics in rm_data.items %}
+      <li>
+        ---{{ tech.name }} : {% if tech.is_done %} DONE {% endif %}
+        <ul>
+          {% for topic, sources in topics.items %}
+            <li>
+              ---------{{ topic.name }}
+              <ul>
+                {% for source in sources %}
+                <li>
+                  -------------{{ source.link }}
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
   <div>
     <a href="/users/{{ request.user.username }}/roadmap/rm{{ user_roadmap.id }}/update/">Edit</a>
   </div>

@@ -45,7 +45,7 @@ class Technology(BaseTechUnit):
     roadmap = models.ForeignKey(RoadMap, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.roadmap.name}_technology'
+        return f'{self.roadmap.name}_{self.name}_technology'
 
 
 class Topic(BaseTechUnit):
