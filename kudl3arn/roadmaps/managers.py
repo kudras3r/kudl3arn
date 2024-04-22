@@ -2,6 +2,21 @@ from .models import RoadMap, Technology, Topic, Source
 
 
 class RoadMapManager:
+    """
+    Take RoadMap.id.
+    Helps to encapsulate main logic from implementation logic.
+    To roadmap showing in templates we need data structure like:
+    {
+        Technology1: {
+            Topic1: QuerySet[Source],
+            Topic2: ...
+        },
+        Technology2: {
+            ...
+        }
+    }
+    get_techs(id: int) -> structure see above
+    """
     def __init__(self, id: int):
         self.rm = RoadMap.objects.get(id=id)
 

@@ -10,4 +10,3 @@ def save_roadmap(sender, instance, **kwargs):
         instance.roadmap.save()
     except AttributeError:
         ...
-    

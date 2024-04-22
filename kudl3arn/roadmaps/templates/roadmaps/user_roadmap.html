@@ -23,6 +23,7 @@
     {% for tech, topics in rm_data.items %}
       <li>
         ---{{ tech.name }} : {% if tech.is_done %} DONE {% endif %}
+        <a href="{{ tech.get_update_url }}">Edit Tech</a>
         <ul>
           {% for topic, sources in topics.items %}
             <li>
@@ -41,6 +42,6 @@
     {% endfor %}
   </ul>
   <div>
-    <a href="/users/{{ request.user.username }}/roadmap/rm{{ user_roadmap.id }}/update/">Edit</a>
+    <a href="/users/{{ request.user.username }}/roadmap/rm{{ user_roadmap.id }}/update_rm/">Edit RM info</a>
   </div>
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.db import models
+from abc import abstractmethod
 
 from users.models import User
 
@@ -8,13 +9,22 @@ class BaseTechUnit(models.Model):
     Base abstract model to extends another technologies, topics etc.
     name and description are the basic fields for all techs.
     """
-    name = models.CharField(max_length=128, )
+    name = models.CharField(max_length=128)
     description = models.TextField(max_length=1024)
     created_timestamp = models.DateTimeField(auto_now=True)
     is_private = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
+
+    @abstractmethod
+    def get_update_url(self):
+        """
+        return url string like:
+            ../roadmap/rm{id}/uprate_rm/ or
+            ../roadmap/rm{id}/update_tech/{id}
+        """
+        ...
 
 
 class RoadMap(BaseTechUnit):
@@ -30,8 +40,11 @@ class RoadMap(BaseTechUnit):
     def __str__(self):
         return f'{self.name}_RM'
 
-    def get_url(self):
+    def get_self_url(self):
         return f'/users/{self.user.username}/roadmap/rm{self.id}/'
+
+    def get_update_url(self):
+        return f'/users/{self.user.username}/roadmap/rm{self.id}/update_rm/'
 
 
 class Technology(BaseTechUnit):
@@ -47,6 +60,9 @@ class Technology(BaseTechUnit):
     def __str__(self):
         return f'{self.roadmap.name}_{self.name}_technology'
 
+    def get_update_url(self):
+        return f'/users/{self.roadmap.user}/roadmap/rm{self.roadmap.id}/update_tech/{self.id}/'
+
 
 class Topic(BaseTechUnit):
     """
@@ -58,6 +74,9 @@ class Topic(BaseTechUnit):
 
     def __str__(self):
         return f'{self.technology.name}_topic'
+
+    def get_update_url(self):
+        ...
 
 
 class Source(models.Model):

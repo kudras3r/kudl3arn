@@ -17,18 +17,11 @@
 {% endblock %}
 
 {% block content %}
-    You have this RMs:
-  </h1>
-  <ul>
-    {% for rm in user_roadmaps %}
-      <li>
-        <h1>{{ rm }}</h1>
-        <p>
-          <a href="{{ rm.get_self_url }}">name: {{ rm.name }}</a> <br>
-          descr: {{ rm.description }} <br>
-          in progress at: {{ rm.progress }}%
-        </p>
-      </li>
-    {% endfor %}
-  </ul>
+<form action="{{ tech.get_update_url }}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  {{ tech_form.as_p }}
+
+  <input type="submit" value="Save">
+</form>
 {% endblock %}

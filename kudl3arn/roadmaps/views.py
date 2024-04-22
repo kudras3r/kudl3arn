@@ -2,8 +2,8 @@ from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from roadmaps.forms import UpdateRoadMapForm
-from roadmaps.models import RoadMap
+from roadmaps.forms import UpdateRoadMapForm, UpdateTechnologyForm
+from roadmaps.models import RoadMap, Technology
 from roadmaps.managers import RoadMapManager
 
 
@@ -38,13 +38,32 @@ def update_roadmap(request: HttpRequest, username: str, rm_id: int) -> HttpRespo
         form = UpdateRoadMapForm(request.POST, instance=roadmap)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(f'/users/{request.user.username}/roadmap/rm{roadmap.id}/')
+            return HttpResponseRedirect(roadmap.get_self_url())
     else:
-        form = UpdateRoadMapForm(instance=roadmap)
+        rm_form = UpdateRoadMapForm(instance=roadmap)
+
     context = {
         'title': 'RM update',
-        'rm_form': form,
+        'rm_form': rm_form,
         'roadmap': roadmap,
     }
     return render(request, 'roadmaps/update_roadmap.html', context)
 
+
+@login_required()
+def update_tech(request, username: str, rm_id: int, tech_id: int):
+    tech = Technology.objects.get(id=tech_id)
+    if request.method == 'POST':
+        tech_form = UpdateTechnologyForm(request.POST, instance=tech)
+        if tech_form.is_valid():
+            tech_form.save()
+            return HttpResponseRedirect(tech.roadmap.get_self_url())
+    else:
+        tech_form = UpdateTechnologyForm(instance=tech)
+    context = {
+        'title': 'Tech Update',
+        'tech_form': tech_form,
+        'tech': tech,
+        'rm_id': rm_id,
+    }
+    return render(request, 'roadmaps/update_tech.html', context)
