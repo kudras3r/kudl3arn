@@ -1,4 +1,7 @@
+from django.http import HttpResponseRedirect
+
 from .models import RoadMap, Technology, Topic, Source
+from roadmaps.forms import UpdateRoadMapForm, UpdateTechnologyForm
 
 
 class RoadMapManager:
@@ -20,14 +23,6 @@ class RoadMapManager:
     def __init__(self, id: int):
         self.rm = RoadMap.objects.get(id=id)
 
-    def get_techs(self) -> dict[Technology, dict[Topic, Source]]:
-        techs = Technology.objects.filter(roadmap=self.rm)
-        rm_data = {}
-        for tech in techs:
-            rm_data.setdefault(tech, None)
-            rm_data[tech] = self._get_topics_for_tech(tech)
-        return rm_data
-
     @staticmethod
     def _get_topics_for_tech(tech: Technology) -> dict[Topic, Source]:
         topics = Topic.objects.filter(technology=tech)
@@ -37,3 +32,29 @@ class RoadMapManager:
             sources = Source.objects.filter(topic=topic)
             data[topic] = sources
         return data
+
+    def get_techs(self) -> dict[Technology, dict[Topic, Source]]:
+        techs = Technology.objects.filter(roadmap=self.rm)
+        rm_data = {}
+        for tech in techs:
+            rm_data.setdefault(tech, None)
+            rm_data[tech] = self._get_topics_for_tech(tech)
+        return rm_data
+
+    def update(self, data: dict) -> HttpResponseRedirect:
+        """
+        See views update_roadmap func.
+        If user send POST req with data - updating RoadMap table
+        """
+        form = UpdateRoadMapForm(data, instance=self.rm)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(self.rm.get_self_url())
+
+    def get_update_form(self) -> UpdateRoadMapForm:
+        """
+        See views.
+        If user just watch at his roadmap with GET req - let give him form
+        """
+        form = UpdateRoadMapForm(instance=self.rm)
+        return form

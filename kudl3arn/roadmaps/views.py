@@ -33,19 +33,16 @@ def user_roadmap(request: HttpRequest, username: str, rm_id: int) -> HttpRespons
 
 @login_required
 def update_roadmap(request: HttpRequest, username: str, rm_id: int) -> HttpResponse:
-    roadmap = RoadMap.objects.get(id=rm_id)
+    manager = RoadMapManager(rm_id)
     if request.method == 'POST':
-        form = UpdateRoadMapForm(request.POST, instance=roadmap)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(roadmap.get_self_url())
+        return manager.update(request.POST)
     else:
-        rm_form = UpdateRoadMapForm(instance=roadmap)
+        rm_form = manager.get_update_form()
 
     context = {
         'title': 'RM update',
         'rm_form': rm_form,
-        'roadmap': roadmap,
+        'roadmap': manager.rm,
     }
     return render(request, 'roadmaps/update_roadmap.html', context)
 
